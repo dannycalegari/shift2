@@ -44,6 +44,8 @@ cpx I (0.0,1.0);
 #include "julia.cc"
 #include "mandelbrot.cc"
 #include "lamination.cc"
+#include "green.cc"
+#include "sausage.cc"
 #include "interface.cc"
 
 

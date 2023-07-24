@@ -67,7 +67,7 @@ void setup_graphics(void){
 	display_height = DisplayHeight(display, screen_num);
 	screen_num = DefaultScreen(display);  
 	width = 1600;
-	height = 500;
+	height = 500;	// 500
 	win = XCreateSimpleWindow(display, RootWindow(display, screen_num), 0, 0, width, 
 		height, border_width, BlackPixel(display, screen_num), WhitePixel(display, screen_num));
 	XSelectInput(display, win, ExposureMask | KeyPressMask | ButtonPressMask );
@@ -103,12 +103,13 @@ void draw_point(int x, int y, long col){
 	XDrawPoint(display, win, gc, x, y);
 };
 
-void draw_point(double X, double Y){
+void draw_point(double X, double Y, long col){
 	point p;
 	p=v_to_p(X,Y);
-    XSetForeground(display, gc, 0x000000);
+    XSetForeground(display, gc, col);
 	XDrawPoint(display, win, gc, p.x, p.y);	
 };
+
 
 void draw_edge(double X1, double Y1, double X2, double Y2){
 	point p1,p2;
@@ -127,6 +128,19 @@ void draw_edge(double X1, double Y1, double X2, double Y2, long col){
     XSetForeground(display, gc, col);
     XSetLineAttributes(display, gc, 2, LineSolid, 1, 1);
     XDrawLine(display, win, gc, p1.x, p1.y, p2.x, p2.y);	
+};
+
+void draw_triangle(double X1, double Y1, double X2, double Y2, double X3, double Y3, long col){
+	XPoint p[3];
+	p[0].x=v_to_p(X1,Y1).x;
+	p[0].y=v_to_p(X1,Y1).y;
+	p[1].x=v_to_p(X2,Y2).x;
+	p[1].y=v_to_p(X2,Y2).y;
+	p[2].x=v_to_p(X3,Y3).x;
+	p[2].y=v_to_p(X3,Y3).y;
+	XSetForeground(display, gc, col);
+    XSetLineAttributes(display, gc, 2, LineSolid, 1, 1);
+	XFillPolygon(display, win, gc, p, 3, Convex, CoordModeOrigin);	
 };
 
 void draw_circle(double X, double Y, double R){

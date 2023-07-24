@@ -87,6 +87,8 @@ void draw_preimages(double A, double B, double C, double D, int depth, double h)
 void draw_lamination(cpx b){
 	// draw quadratic lamination with bottcher coordinate b
 	if(b==0.0){
+		erase_rectangle(900,0,600,1000);
+		draw_circle(3.3,-1.3,1.0);
 		return;
 	};
 	int depth;
